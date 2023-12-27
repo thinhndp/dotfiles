@@ -5,6 +5,9 @@ nvim-bu/
 scoop/
 whkdrc
 wezterm/bg/*
+yarn/
+hero2/
+.DS_Store
 
 # keep
 !wezterm/bg/.gitkeep

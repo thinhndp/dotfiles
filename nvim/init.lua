@@ -196,16 +196,27 @@ require('lazy').setup({
     },
   },
 
+  -- {
+  --   -- Theme inspired by Atom
+  --   'navarasu/onedark.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     require('onedark').setup {
+  --       transparent = true,
+  --       term_colors = true
+  --     }
+  --     vim.cmd.colorscheme 'onedark'
+  --   end,
+  -- },
+
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
+    'Mofiqul/dracula.nvim',
     priority = 1000,
     config = function()
-      require('onedark').setup {
-        transparent = true,
-        term_colors = true
+      require('dracula').setup {
+        transparent_bg = true,
       }
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme 'dracula'
     end,
   },
 
@@ -216,7 +227,8 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        -- theme = 'onedark',
+        theme = 'dracula-nvim',
         component_separators = '|',
         section_separators = '',
       },
@@ -306,7 +318,10 @@ require('lazy').setup({
       vim.keymap.set('n', "<C-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
       vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
     end
-  }
+  },
+  {
+    'pechorin/any-jump.vim',
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
