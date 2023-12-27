@@ -2,3 +2,9 @@ configstore/
 exercism/
 github-copilot/
 nvim-bu/
+scoop/
+whkdrc
+wezterm/bg/*
+
+# keep
+!wezterm/bg/.gitkeep
