@@ -44,6 +44,8 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.cmd('command EditInit edit ~/.config/nvim/init.lua')
+vim.opt.relativenumber = true
+vim.opt.wrap = false
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
@@ -304,7 +306,8 @@ require('lazy').setup({
   --     { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
   --   },
   -- },
-  { 'alexghergh/nvim-tmux-navigation',
+  {
+    'alexghergh/nvim-tmux-navigation',
     config = function()
       local nvim_tmux_nav = require('nvim-tmux-navigation')
       nvim_tmux_nav.setup {
@@ -321,6 +324,14 @@ require('lazy').setup({
   },
   {
     'pechorin/any-jump.vim',
+  },
+  {
+    'rmagatti/auto-session',
+    config = function()
+      require("auto-session").setup {
+        log_level = "error",
+      }
+    end
   },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.

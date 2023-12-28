@@ -1,3 +1,7 @@
+# keep
+!wezterm/bg/.gitkeep
+
+# ignore
 configstore/
 exercism/
 github-copilot/
@@ -8,6 +12,6 @@ wezterm/bg/*
 yarn/
 hero2/
 .DS_Store
-
-# keep
-!wezterm/bg/.gitkeep
+lazygit
+tmux/plugins/*
+nvim/lazy-lock.json
