@@ -8,8 +8,10 @@ end)
 local config = require('config')
 local appearance = require('config.appearance')
 local bindings = require('config.bindings')
+local environment = require('config.environment')
 
 return config:init()
   :append(appearance:init(files_in_bg))
   :append(bindings)
+  :append(environment)
   .options
