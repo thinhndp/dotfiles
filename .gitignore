@@ -1,5 +1,5 @@
 # keep
-!wezterm/bg/.gitkeep
+# !wezterm/bg/.gitkeep
 
 # ignore
 configstore/
@@ -9,6 +9,7 @@ nvim-bu/
 scoop/
 whkdrc
 wezterm/bg/*
+wezterm/_bg/*
 yarn/
 hero2/
 .DS_Store
