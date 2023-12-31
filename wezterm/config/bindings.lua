@@ -23,7 +23,6 @@ local keys = {
     key = 'F5',
     mods = 'NONE',
     action = wezterm.action_callback(function()
-      wezterm.log_info 'in F5 bro'
       local old_dir = wezterm.config_dir .. "/_bg"
       local new_dir = wezterm.config_dir .. "/bg"
       os.rename(old_dir, new_dir)
@@ -34,10 +33,10 @@ local keys = {
     key = 'F5',
     mods = mod.CONTROL,
     action = wezterm.action_callback(function()
-      wezterm.log_info 'in cmd F5 bro'
       local old_dir = wezterm.config_dir .. "/bg"
       local new_dir = wezterm.config_dir .. "/_bg"
       os.rename(old_dir, new_dir)
+      wezterm.reload_configuration()
     end)
   },
 }
