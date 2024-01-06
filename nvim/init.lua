@@ -273,6 +273,32 @@ require('lazy').setup({
       },
     },
     config = function()
+      local lga_actions = require("telescope-live-grep-args.actions")
+      require('telescope').setup {
+        defaults = {
+          -- mappings = {
+          --   i = {
+          --     ['<C-u>'] = false,
+          --     ['<C-d>'] = false,
+          --   },
+          -- },
+          cache_picker = {
+            num_pickers = 10,
+          },
+        },
+        extensions = {
+          live_grep_args = {
+            auto_quoting = true, -- enable/disable auto-quoting
+            -- define mappings, e.g.
+            mappings = { -- extend mappings
+              i = {
+                ["<C-q>"] = lga_actions.quote_prompt(),
+                ["<C-g>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+              },
+            },
+          }
+        }
+      }
       require('telescope').load_extension('live_grep_args')
     end
   },
@@ -451,19 +477,32 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-    cache_picker = {
-      num_pickers = 5,
-    },
-  },
-}
+-- local lga_actions = require("telescope-live-grep-args.actions")
+-- require('telescope').setup {
+--   defaults = {
+--     mappings = {
+--       i = {
+--         ['<C-u>'] = false,
+--         ['<C-d>'] = false,
+--       },
+--     },
+--     cache_picker = {
+--       num_pickers = 10,
+--     },
+--   },
+--   extensions = {
+--     live_grep_args = {
+--       auto_quoting = true, -- enable/disable auto-quoting
+--       -- define mappings, e.g.
+--       mappings = { -- extend mappings
+--         i = {
+--           ["<C-k>"] = lga_actions.quote_prompt(),
+--           ["<C-i>"] = require("telescope-live-grep-args.actions").quote_prompt({ postfix = " --iglob " }),
+--         },
+--       },
+--     }
+--   }
+-- }
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
