@@ -294,6 +294,7 @@ require('lazy').setup({
               i = {
                 ["<C-q>"] = lga_actions.quote_prompt(),
                 ["<C-g>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                ["<C-e>r"] = lga_actions.quote_prompt({ postfix = " --iglob '!spec/**" }),
               },
             },
           }
