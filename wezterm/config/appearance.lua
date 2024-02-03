@@ -22,8 +22,8 @@ function appearance:init(files)
   end
 
   local result = {}
-  result.color_scheme = 'Dracula'
-  result.font = wezterm.font 'SpaceMono Nerd Font Mono'
+  result.color_scheme = 'Catppuccin Macchiato'
+  result.font = wezterm.font 'FiraCode Nerd Font Mono'
   result.font_size = 14
   result.freetype_load_flags = 'NO_HINTING'
   if file ~= nil then

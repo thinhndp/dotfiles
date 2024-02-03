@@ -211,15 +211,28 @@ require('lazy').setup({
   --   end,
   -- },
 
+  -- {
+  --   'Mofiqul/dracula.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     require('dracula').setup {
+  --       transparent_bg = true,
+  --     }
+  --     vim.cmd.colorscheme 'dracula'
+  --   end,
+  -- },
+  --
   {
-    'Mofiqul/dracula.nvim',
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
     config = function()
-      require('dracula').setup {
-        transparent_bg = true,
+      require("catppuccin").setup {
+        flavour = "macchiato",
+        transparent_background = true
       }
-      vim.cmd.colorscheme 'dracula'
-    end,
+      vim.cmd.colorscheme 'catppuccin'
+    end
   },
 
   {
@@ -831,4 +844,5 @@ vim.keymap.set('n', '<leader>cpn', ':let @+ = expand("%:t")<cr>', { desc = '[C]o
 vim.keymap.set('n', '<leader>go', ':GBrowse<cr>', { desc = '[G]it [O]pen in remote' })
 vim.keymap.set('n', '<leader>gb', ':Git blame<cr>', { desc = '[G]it [B]lame' })
 -- The line beneath this is called `modeline`. See `:help modeline`
+--
 -- vim: ts=2 sts=2 sw=2 et
