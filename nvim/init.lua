@@ -283,7 +283,7 @@ require('lazy').setup({
           --   },
           -- },
           cache_picker = {
-            num_pickers = 10,
+            num_pickers = 20,
           },
         },
         extensions = {
@@ -293,8 +293,8 @@ require('lazy').setup({
             mappings = { -- extend mappings
               i = {
                 ["<C-q>"] = lga_actions.quote_prompt(),
-                ["<C-g>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-                ["<C-e>r"] = lga_actions.quote_prompt({ postfix = " --iglob '!spec/**" }),
+                ["<C-g>"] = lga_actions.quote_prompt({ postfix = " --iglob '" }),
+                ["<C-g>es"] = lga_actions.quote_prompt({ postfix = " --iglob '!spec/**'" }),
               },
             },
           }
@@ -330,10 +330,12 @@ require('lazy').setup({
             visible = true,
             hide_dotfiles = false,
             hide_gitignored = false,
-          }
+          },
+          hijack_netrw_behavior = "disabled",
         }
       }
       vim.keymap.set('n', '\\', ':Neotree toggle<CR>', { noremap = true, silent = true })
+      vim.keymap.set('n', '<leader>\\', ':Neotree reveal<CR>', { noremap = true, silent = true })
     end
   },
 
@@ -822,6 +824,11 @@ cmp.setup {
 }
 
 -- Remap
-vim.keymap.set('n', '<leader>cp', ':let @+ = expand("%")<cr>', { desc = '[C]opy [P]ath' })
+vim.keymap.set('n', '<leader>cpr', ':let @+ = expand("%")<cr>', { desc = '[C]opy [P]ath [R]elative' })
+vim.keymap.set('n', '<leader>cpf', ':let @+ = expand("%:p")<cr>', { desc = '[C]opy [P]ath [F]ull' })
+vim.keymap.set('n', '<leader>cpn', ':let @+ = expand("%:t")<cr>', { desc = '[C]opy [P]ath [N]ame' })
+
+vim.keymap.set('n', '<leader>go', ':GBrowse<cr>', { desc = '[G]it [O]pen in remote' })
+vim.keymap.set('n', '<leader>gb', ':Git blame<cr>', { desc = '[G]it [B]lame' })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
