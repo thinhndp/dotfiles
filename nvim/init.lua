@@ -836,6 +836,16 @@ cmp.setup {
   },
 }
 
+-- Setup Editor
+vim.opt.swapfile = false
+
+local undo_dir = vim.fn.stdpath('data') .. '/undo'
+if not vim.loop.fs_stat(undo_dir) then
+  vim.loop.fs_mkdir(undo_dir, tonumber("700", 8))
+end
+vim.opt.undofile = true
+vim.opt.undodir = undo_dir
+
 -- Remap
 vim.keymap.set('n', '<leader>cpr', ':let @+ = expand("%")<cr>', { desc = '[C]opy [P]ath [R]elative' })
 vim.keymap.set('n', '<leader>cpf', ':let @+ = expand("%:p")<cr>', { desc = '[C]opy [P]ath [F]ull' })
