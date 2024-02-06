@@ -22,6 +22,7 @@ function appearance:init(files)
   end
 
   local result = {}
+  result.window_decorations = 'RESIZE'
   result.color_scheme = 'Catppuccin Macchiato'
   result.font = wezterm.font 'FiraCode Nerd Font Mono'
   result.font_size = 14
