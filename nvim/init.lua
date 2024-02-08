@@ -123,6 +123,31 @@ require('lazy').setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
+
+  {
+    'mfussenegger/nvim-dap',
+    dependencies = {
+      'suketa/nvim-dap-ruby'
+    },
+    config = function()
+      require("dap-ruby").setup()
+      vim.keymap.set('n', '<Leader>dc', function() require('dap').continue() end, { desc = '[d]ebug [c]ontinue'})
+      vim.keymap.set('n', '<Leader>do', function() require('dap').step_over() end, { desc = '[d]ebug step [o]ver'})
+      vim.keymap.set('n', '<Leader>di', function() require('dap').step_into() end, { desc = '[d]ebug step [i]nto'})
+      vim.keymap.set('n', '<Leader>dO', function() require('dap').step_out() end, { desc = '[d]ebug step [O]ver'})
+      vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = '[d]ebug toggle [b]reakpoint'})
+    end
+  },
+  {
+    'rcarriga/nvim-dap-ui',
+    dependencies = { 'mfussenegger/nvim-dap' },
+    config = function()
+      require('dapui').setup()
+      vim.keymap.set('n', '<Leader>dt', function() require('dapui').toggle() end, { desc = '[d]ebug [t]oggle UI'})
+      vim.keymap.set('n', '<Leader>dr', ":lua require('dapui').open({reset = true})<CR>", { noremap = true, desc = '[d]ebug [r]eset' })
+    end,
+  },
+
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -730,7 +755,7 @@ local on_attach = function(_, bufnr)
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+  nmap('<leader>lD', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
   nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
