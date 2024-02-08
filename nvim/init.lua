@@ -222,6 +222,7 @@ require('lazy').setup({
     }
   },
 
+
   -- {
   --   -- Theme inspired by Atom
   --   'navarasu/onedark.nvim',
@@ -376,6 +377,29 @@ require('lazy').setup({
     end
   },
 
+  {
+    'rmagatti/auto-session',
+    config = function()
+      require("auto-session").setup {
+        log_level = "error",
+        auto_session_root_dir = vim.fn.stdpath('data').."/sessions/",
+        auto_session_enabled = true,
+        auto_session_create_enabled = true,
+        auto_save_enabled = true,
+        auto_restore_enabled = true,
+        auto_session_use_git_branch = false,
+        auto_session_enable_last_session = false,
+        pre_save_cmds = {
+          function()
+            if vim.fn.exists(':Neotree') then
+              vim.cmd 'tabdo Neotree close'
+            end
+          end,
+        },
+      }
+    end
+  },
+
   -- {
   --   "christoomey/vim-tmux-navigator",
   --   cmd = {
@@ -409,17 +433,11 @@ require('lazy').setup({
       vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
     end
   },
+  
   {
     'pechorin/any-jump.vim',
   },
-  {
-    'rmagatti/auto-session',
-    config = function()
-      require("auto-session").setup {
-        log_level = "error",
-      }
-    end
-  },
+  
   {
     'ggandor/leap.nvim',
     config = function()
@@ -869,6 +887,7 @@ if not vim.loop.fs_stat(undo_dir) then
 end
 vim.opt.undofile = true
 vim.opt.undodir = undo_dir
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- Remap
 vim.keymap.set('n', '<leader>cpr', ':let @+ = expand("%")<cr>', { desc = '[C]opy [P]ath [R]elative' })
