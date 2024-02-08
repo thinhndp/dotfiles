@@ -458,15 +458,27 @@ require('lazy').setup({
       vim.keymap.set('n', "<C-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
     end
   },
-  
+
   {
     'pechorin/any-jump.vim',
   },
-  
+
   {
     'ggandor/leap.nvim',
     config = function()
       require('leap').create_default_mappings()
+    end
+  },
+
+  {
+    'vim-test/vim-test',
+    config = function()
+      vim.g['test#strategy'] = 'neovim_sticky'
+      vim.g['test#neovim_sticky#reopen_window'] = 1
+      -- vim.g['test#neovim#start_normal'] = 1
+      vim.keymap.set('n', "<Leader>tn", ':TestNearest<CR>', { desc = '[t]est [n]earest' })
+      vim.keymap.set('n', "<Leader>tf", ':TestFile<CR>', { desc = '[t]est [f]ile' })
+      vim.keymap.set('n', "<Leader>tl", ':TestLast<CR>', { desc = '[t]est [l]ast' })
     end
   },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
