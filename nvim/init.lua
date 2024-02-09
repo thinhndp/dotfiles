@@ -475,12 +475,14 @@ require('lazy').setup({
     config = function()
       vim.g['test#strategy'] = 'neovim_sticky'
       vim.g['test#neovim_sticky#reopen_window'] = 1
-      -- vim.g['test#neovim#start_normal'] = 1
       vim.keymap.set('n', "<Leader>tn", ':TestNearest<CR>', { desc = '[t]est [n]earest' })
       vim.keymap.set('n', "<Leader>tf", ':TestFile<CR>', { desc = '[t]est [f]ile' })
       vim.keymap.set('n', "<Leader>tl", ':TestLast<CR>', { desc = '[t]est [l]ast' })
     end
   },
+
+  { 'tpope/vim-bundler' },
+  { 'tpope/vim-rails' }
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
