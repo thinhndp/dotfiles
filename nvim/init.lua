@@ -482,7 +482,24 @@ require('lazy').setup({
   },
 
   { 'tpope/vim-bundler' },
-  { 'tpope/vim-rails' }
+  { 'tpope/vim-rails' },
+
+  {
+    'fredeeb/tardis.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('tardis-nvim').setup({
+        keymap = {
+          ["next"] = '<C-n>',
+          ["prev"] = '<C-p>',
+          ["quit"] = 'q',
+          ["revision_message"] = '<C-m>',
+        },
+        initial_revisions = 10,
+        max_revisions = 256,
+      })
+    end
+  }
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -928,13 +945,14 @@ vim.opt.undofile = true
 vim.opt.undodir = undo_dir
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
--- Remap
+-- Binding
 vim.keymap.set('n', '<leader>cpr', ':let @+ = expand("%")<cr>', { desc = '[C]opy [P]ath [R]elative' })
 vim.keymap.set('n', '<leader>cpf', ':let @+ = expand("%:p")<cr>', { desc = '[C]opy [P]ath [F]ull' })
 vim.keymap.set('n', '<leader>cpn', ':let @+ = expand("%:t")<cr>', { desc = '[C]opy [P]ath [N]ame' })
 
-vim.keymap.set('n', '<leader>go', ':GBrowse<cr>', { desc = '[G]it [O]pen in remote' })
-vim.keymap.set('n', '<leader>gb', ':Git blame<cr>', { desc = '[G]it [B]lame' })
+vim.keymap.set('n', '<leader>go', ':GBrowse<CR>', { desc = '[g]it [o]pen in remote' })
+vim.keymap.set('n', '<leader>gb', ':Git blame<CR>', { desc = '[g]it [b]lame' })
+vim.keymap.set('n', '<leader>gh', ':0GcLog<CR>', { desc = '[g]it [h]istory' })
 -- The line beneath this is called `modeline`. See `:help modeline`
 --
 -- vim: ts=2 sts=2 sw=2 et
