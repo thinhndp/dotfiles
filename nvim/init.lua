@@ -124,29 +124,29 @@ require('lazy').setup({
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
 
-  {
-    'mfussenegger/nvim-dap',
-    dependencies = {
-      'suketa/nvim-dap-ruby'
-    },
-    config = function()
-      require("dap-ruby").setup()
-      vim.keymap.set('n', '<Leader>dc', function() require('dap').continue() end, { desc = '[d]ebug [c]ontinue'})
-      vim.keymap.set('n', '<Leader>do', function() require('dap').step_over() end, { desc = '[d]ebug step [o]ver'})
-      vim.keymap.set('n', '<Leader>di', function() require('dap').step_into() end, { desc = '[d]ebug step [i]nto'})
-      vim.keymap.set('n', '<Leader>dO', function() require('dap').step_out() end, { desc = '[d]ebug step [O]ver'})
-      vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = '[d]ebug toggle [b]reakpoint'})
-    end
-  },
-  {
-    'rcarriga/nvim-dap-ui',
-    dependencies = { 'mfussenegger/nvim-dap' },
-    config = function()
-      require('dapui').setup()
-      vim.keymap.set('n', '<Leader>dt', function() require('dapui').toggle() end, { desc = '[d]ebug [t]oggle UI'})
-      vim.keymap.set('n', '<Leader>dr', ":lua require('dapui').open({reset = true})<CR>", { noremap = true, desc = '[d]ebug [r]eset' })
-    end,
-  },
+  -- {
+  --   'mfussenegger/nvim-dap',
+  --   dependencies = {
+  --     'suketa/nvim-dap-ruby'
+  --   },
+  --   config = function()
+  --     require("dap-ruby").setup()
+  --     vim.keymap.set('n', '<Leader>dc', function() require('dap').continue() end, { desc = '[d]ebug [c]ontinue'})
+  --     vim.keymap.set('n', '<Leader>do', function() require('dap').step_over() end, { desc = '[d]ebug step [o]ver'})
+  --     vim.keymap.set('n', '<Leader>di', function() require('dap').step_into() end, { desc = '[d]ebug step [i]nto'})
+  --     vim.keymap.set('n', '<Leader>dO', function() require('dap').step_out() end, { desc = '[d]ebug step [O]ver'})
+  --     vim.keymap.set('n', '<Leader>db', function() require('dap').toggle_breakpoint() end, { desc = '[d]ebug toggle [b]reakpoint'})
+  --   end
+  -- },
+  -- {
+  --   'rcarriga/nvim-dap-ui',
+  --   dependencies = { 'mfussenegger/nvim-dap' },
+  --   config = function()
+  --     require('dapui').setup()
+  --     vim.keymap.set('n', '<Leader>dt', function() require('dapui').toggle() end, { desc = '[d]ebug [t]oggle UI'})
+  --     vim.keymap.set('n', '<Leader>dr', ":lua require('dapui').open({reset = true})<CR>", { noremap = true, desc = '[d]ebug [r]eset' })
+  --   end,
+  -- },
 
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
@@ -442,6 +442,21 @@ require('lazy').setup({
   --     { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
   --   },
   -- },
+  {
+    'dense-analysis/ale',
+    config = function()
+      -- Configuration goes here.
+      local g = vim.g
+
+      g.ale_ruby_rubocop_auto_correct_all = 1
+
+      g.ale_linters = {
+        ruby = {'rubocop', 'ruby'},
+        javascript = {'eslint'},
+        lua = {'lua_language_server'}
+      }
+    end
+  },
   {
     'alexghergh/nvim-tmux-navigation',
     config = function()
@@ -882,6 +897,16 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+require('lspconfig').solargraph.setup{
+  settings = {
+    solargraph = {
+      diagnostics = true,
+      completion = true,
+      formatting = false
+    }
+  }
+}
+
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
@@ -953,6 +978,10 @@ vim.keymap.set('n', '<leader>cpn', ':let @+ = expand("%:t")<cr>', { desc = '[C]o
 vim.keymap.set('n', '<leader>go', ':GBrowse<CR>', { desc = '[g]it [o]pen in remote' })
 vim.keymap.set('n', '<leader>gb', ':Git blame<CR>', { desc = '[g]it [b]lame' })
 vim.keymap.set('n', '<leader>gh', ':0GcLog<CR>', { desc = '[g]it [h]istory' })
+
+vim.keymap.set('n', '<leader>y', '"+y', { desc = '[y]arn to system clipboard' })
+vim.keymap.set('v', '<leader>y', '"+y', { desc = '[y]arn to system clipboard' })
+vim.keymap.set('n', '<leader>p', '"+p', { desc = '[p]aste from system clipboard' })
 -- The line beneath this is called `modeline`. See `:help modeline`
 --
 -- vim: ts=2 sts=2 sw=2 et
